@@ -3,18 +3,17 @@
 
 int main(){
     int N;
-    vl coord(3);
-    vvl lapse(110000, coord);
+    vvl coord(110000, vl(3));
     cin >> N;
     // ti, xi, yiの初期値
-    lapse[0] = {0,0,0};
+    coord[0] = {0,0,0};
     for(int i: range_to(1,N)){
-        cin >> lapse[i][0] >> lapse[i][1] >> lapse[i][2];
+        cin >> coord[i][0] >> coord[i][1] >> coord[i][2];
     }
     bool flag = true;
     for(int i: range_until(0,N)){
-        int dt = lapse[i+1][0] - lapse[i][0];
-        int dist = abs(lapse[i+1][1]-lapse[i][1]) + abs(lapse[i+1][2]-lapse[i][2]);
+        int dt = coord[i+1][0] - coord[i][0];
+        int dist = abs(coord[i+1][1]-coord[i][1]) + abs(coord[i+1][2]-coord[i][2]);
         if (dt < dist){
             flag = false;
         } 
