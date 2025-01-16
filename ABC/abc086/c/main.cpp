@@ -2,18 +2,18 @@
 #include __FILE__
 
 int main(){
-    int N;
+    ll N;
     vvl coord(110000, vl(3));
     cin >> N;
     // ti, xi, yiの初期値
     coord[0] = {0,0,0};
-    for(int i: range_to(1,N)){
+    for(ll i: range_to(1,N)){
         cin >> coord[i][0] >> coord[i][1] >> coord[i][2];
     }
     bool flag = true;
-    for(int i: range_until(0,N)){
-        int dt = coord[i+1][0] - coord[i][0];
-        int dist = abs(coord[i+1][1]-coord[i][1]) + abs(coord[i+1][2]-coord[i][2]);
+    for(ll i: range_until(0,N)){
+        ll dt = coord[i+1][0] - coord[i][0];
+        ll dist = abs(coord[i+1][1]-coord[i][1]) + abs(coord[i+1][2]-coord[i][2]);
         if (dt < dist){
             flag = false;
         } 
@@ -122,14 +122,16 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_until(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);  // start と stop を加算した結果型
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_to(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;
