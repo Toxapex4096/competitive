@@ -1,19 +1,22 @@
 #if !__INCLUDE_LEVEL__
 #include __FILE__
 
+ll f(ll n) {return n > 0 ? n*f(n - 1) : 1;}
+
 int main(){
-    int A, B, C, X;
-    int res = 0;
-    cin >> A >> B >> C >> X;
-    for(int a: range_closed(0,A)){
-        for(int b: range_closed(0,B)){
-            for(int c: range_closed(0,C)){
-                int sum = 500 * a + 100 * b + 50 * c;
-                if(sum == X) ++res;
-            }
+    ll X;
+    cin >> X;    
+    ll cnt = 2;
+    while(1){
+        ll judge = f(cnt);
+        if(X > judge){
+            cnt++;
+            continue;
+        }else{
+            cout << cnt << el;
+            break;
         }
     }
-    cout << res << el;
 }
 
 #else
@@ -114,14 +117,16 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_half_open(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_closed(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;

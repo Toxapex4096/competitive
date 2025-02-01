@@ -2,18 +2,23 @@
 #include __FILE__
 
 int main(){
-    int A, B, C, X;
-    int res = 0;
-    cin >> A >> B >> C >> X;
-    for(int a: range_closed(0,A)){
-        for(int b: range_closed(0,B)){
-            for(int c: range_closed(0,C)){
-                int sum = 500 * a + 100 * b + 50 * c;
-                if(sum == X) ++res;
-            }
+    ll Q;
+    cin >> Q;
+    vvl query(Q, vl(3));
+    query[0] = {0,0,0};
+    for(ll i: range_to(1LL,Q)){
+        cin >> query[i][0] >> query[i][1];
+        if(query[i][0] == 1){
+            query[i][2] += query[i][1];
+        }else if(query[i][0] == 2){
+
+        }else if(query[i][0] == 3){
+            ll head = query[i][1]
         }
+        
     }
-    cout << res << el;
+
+
 }
 
 #else
@@ -114,14 +119,16 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_half_open(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_closed(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;

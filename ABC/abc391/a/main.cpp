@@ -2,18 +2,16 @@
 #include __FILE__
 
 int main(){
-    int A, B, C, X;
-    int res = 0;
-    cin >> A >> B >> C >> X;
-    for(int a: range_closed(0,A)){
-        for(int b: range_closed(0,B)){
-            for(int c: range_closed(0,C)){
-                int sum = 500 * a + 100 * b + 50 * c;
-                if(sum == X) ++res;
-            }
-        }
-    }
-    cout << res << el;
+    string D;
+    cin >> D;
+    if (D == "N") cout << "S" << endl;
+    if (D == "S") cout << "N" << endl;
+    if (D == "W") cout << "E" << endl;
+    if (D == "E") cout << "W" << endl;
+    if (D == "NE") cout << "SW" << endl;
+    if (D == "NW") cout << "SE" << endl;
+    if (D == "SE") cout << "NW" << endl;
+    if (D == "SW") cout << "NE" << endl;
 }
 
 #else
@@ -114,20 +112,22 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_half_open(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_closed(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;
-inline void YESNO(bool condition) { std::cout << (condition ? "YES" : "NO") << '\n'; }
-inline void yesno(bool condition) { std::cout << (condition ? "yes" : "no") << '\n'; }
-inline void YesNo(bool condition) { std::cout << (condition ? "Yes" : "No") << '\n'; }
+inline void YESNO(bool condition) { std::cout << (condition ? "YES" : "NO") << "\n"; }
+inline void yesno(bool condition) { std::cout << (condition ? "yes" : "no") << "\n"; }
+inline void YesNo(bool condition) { std::cout << (condition ? "Yes" : "No") << "\n"; }
 
 // 引数の変数名とその値を一行で(標準エラー出力へ)出力する;
 template <typename T>
@@ -136,11 +136,11 @@ inline void debug(const std::string& var_name, const T& value, int line = -1) {
     if (line != -1) {
         std::cerr << "(line:" << line << ") ";
     }
-    std::cerr << var_name << ": " << value << "\033[m" << '\n';
+    std::cerr << var_name << ": " << value << "\033[m" << "\n";
 }
 
 // 改行コード、半角スペースの省略;
-constexpr char el = '\n';
+constexpr char* el = "\n";
 constexpr const char* spa = " ";
 
 // エラー訂正のための非常に小さな小数点型の数値;
@@ -180,7 +180,7 @@ template<typename T> inline void print_vec(const vector<T> &v, bool split_line=f
     constexpr bool isValue = is_integral<T>::value;
     for (int i = 0; i < (int)v.size(); i++) {
         if constexpr(isValue){
-            if((v[i]==inf) || (v[i]==infl)) cout << 'x' << " \n"[split_line || i+1==(int)v.size()];
+            if((v[i]==inf) || (v[i]==infl)) cout << "x" << " \n"[split_line || i+1==(int)v.size()];
             else cout << v[i] << " \n"[split_line || i+1==(int)v.size()];
         }else cout << v[i] << " \n"[split_line || i+1==(int)v.size()];
     }
@@ -192,7 +192,7 @@ template<typename T1, typename T2> inline void print_vec(const vector<pair<T1,T2
         return;
     }
     for(int i = 0; i < (int)v.size(); i++){
-        cout << '{';
+        cout << "{";
         auto [a,b] = v[i];
         constexpr pair<bool,bool> isValue = {is_integral<T1>::value, is_integral<T2>::value};
         if constexpr(isValue.first){

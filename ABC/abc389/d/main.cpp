@@ -2,18 +2,19 @@
 #include __FILE__
 
 int main(){
-    int A, B, C, X;
-    int res = 0;
-    cin >> A >> B >> C >> X;
-    for(int a: range_closed(0,A)){
-        for(int b: range_closed(0,B)){
-            for(int c: range_closed(0,C)){
-                int sum = 500 * a + 100 * b + 50 * c;
-                if(sum == X) ++res;
-            }
-        }
+    ll R;
+    cin >> R;
+    ll num_sq;
+    while(1){
+        ll i=0,j=0;
+        vl judge(4);
+        if(ll j: range)
+        judge[0] = sqrt(pow((i+0.5),2) + pow((i+0.5),2));
+        judge[1] = sqrt(pow((i+0.5),2) + pow((i-0.5),2));
+        judge[2] = sqrt(pow((i-0.5),2) + pow((i+0.5),2));
+        judge[3] = sqrt(pow((i-0.5),2) + pow((i-0.5),2));
+        if(R - judge)
     }
-    cout << res << el;
 }
 
 #else
@@ -114,14 +115,16 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_half_open(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_closed(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;

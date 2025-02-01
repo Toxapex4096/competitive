@@ -2,18 +2,23 @@
 #include __FILE__
 
 int main(){
-    int A, B, C, X;
-    int res = 0;
-    cin >> A >> B >> C >> X;
-    for(int a: range_closed(0,A)){
-        for(int b: range_closed(0,B)){
-            for(int c: range_closed(0,C)){
-                int sum = 500 * a + 100 * b + 50 * c;
-                if(sum == X) ++res;
-            }
+    ll N, M;
+    cin >> N >> M;
+    vvs S(100, vs(100));
+    for (auto i: range_to(1,N)){
+        for(auto j: range_to(1,N)){
+            cin >> S[i][j];
         }
     }
-    cout << res << el;
+    vvs T(100, vs(100));
+    for (auto i: range_to(1,M)){
+        for(auto j: range_to(1,M)){
+            cin >> T[i][j];
+        }
+    }
+    ll a, b;
+    while()
+
 }
 
 #else
@@ -54,6 +59,7 @@ using vvi = vector<vi>;
 using vvl = vector<vl>;
 using vvll = vector<vll>;
 using vs = vector<string>;
+using vvs = vector<vs>;
 using vpii = vector<pii>;
 // unordered set
 using usi = unordered_set<int>;
@@ -114,14 +120,16 @@ public:
     }
 };
 
-template <typename T>
-inline Range<T> range_half_open(T start, T stop) {
-    return Range<T>(start, stop, false);
+template <typename T1, typename T2>
+inline auto range_until(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, false);
 }
 
-template <typename T>
-inline Range<T> range_closed(T start, T stop) {
-    return Range<T>(start, stop, true);
+template <typename T1, typename T2>
+inline auto range_to(T1 start, T2 stop) {
+    using Common = decltype(start + stop);
+    return Range<Common>((Common)start, (Common)stop, true);
 }
 
 // Yes,No出力の省略 true=yes, false=no;
